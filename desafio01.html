@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Estoque</title>
+</head>
+<body>
+    <h1>Controle de Estoque</h1>
+    <button onclick="iniciarSistema()">Iniciar Sistema</button>
+
+    <script>
+    
+        let estoque = []; // lista vazia para armazenar os equipamentos
+        
+        function exibirMenu() {
+            return prompt("Menu:\n1 - Adicionar Equipamento\n2 - Vender Equipamento\n3 - Exibir Estoque\n 4 - Sair\nOpção: ")
+        }
+
+        function adicionarEquipamento(){ 
+            let nome = prompt('Nome do equipamento? ')
+            let quantidade = parseInt(prompt('Quantidade de equipamento: '))
+
+            if (quantidade <= 0 || isNaN(quantidade) ){ // Manda um alert de resposta invalida caso quantidade seja igual a zero ou vazia.
+                alert('Quantidade invalida. Tente novamente. ')
+                return;
+            }
+
+            let equipamento = estoque.find(equi => equi.nome === nome); // verifica se já tem o equipamento no estoque
+           
+            if (equipamento){
+                equipamento.quantidade += quantidade;
+            }
+            else {
+                estoque.push({nome, quantidade});
+            }
+
+            alert("Equipamento adicionado ao estoque.");
+        }
+        
+        function venderEquipamento(){
+            let nome = prompt('Nome do equipamento a venda:  ');
+            let quantidade = parseInt(prompt('Quantidade do equipamento a venda: '));
+
+            if (isNaN(quantidade || quantidade <= 0)){
+                alert('Quantidade invalida. Tente novamente.');
+                return;
+            }
+
+            let equipamento = estoque.find(equi => equi.nome === nome);
+            if (!equipamento){
+                alert('Este equipamento não foi encontrado no nosso estoque!!');
+                return;
+            }
+
+            if (equipamento.quantidade < quantidade ){
+                alert('Não temos essa quantidade de produto em nosso estoque!');
+                return;
+            }
+
+            equipamento.quantidade -= quantidade;
+            if (equipamento.quantidade === 0) {
+                estoque = estoque.filter(equi => equi.nome !== nome);
+            }
+            alert("Equipamento vendido com sucesso.");
+}
+        
+
+       function exibirEstoque() {
+        if (estoque.length === 0){
+            alert('Estoque vazio!');
+            return;
+        }
+
+        let mensagem = "Estoque:\n";
+        estoque.forEach(equi => {
+            mensagem += `Equipamento: ${equi.nome} Quantidade: ${equi.quantidade}\n`;
+        });
+        alert(mensagem);
+    }
+
+
+
+    function iniciarSistema(){
+        let opcao;
+        do {
+            opcao = exibirMenu();
+            switch (opcao) {
+                case "1":
+                    adicionarEquipamento();
+                    break;
+                case "2":
+                    venderEquipamento();
+                    break;
+                case "3":
+                    exibirEstoque();
+                    break;
+                case "4":
+                    alert("Programa encerrado.");
+                    break;
+                default:
+                    alert("Opção inválida. Tente novamente.");
+            }
+        } while (opcao !== "4");
+    }
+
+    iniciarSistema();
+    </script>
+    
+
+</body>
+</html>
+
