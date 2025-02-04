@@ -11,15 +11,30 @@
 
     <script>
     
-        let estoque = []; // lista vazia para armazenar os equipamentos
+        let estoque = []; 
         
         function exibirMenu() {
             return prompt("Menu:\n1 - Adicionar Equipamento\n2 - Vender Equipamento\n3 - Exibir Estoque\n 4 - Sair\nOpção: ")
         }
 
+        function validarString(nome) {
+            if (!isNaN(nome)) {
+                alert('Entrada inválida. Digite um nome válido.');
+                return false;
+            }
+            return true;
+        }
+
         function adicionarEquipamento(){ 
-            let nome = prompt('Nome do equipamento? ')
+            let nome = prompt('Nome do equipamento? ').trim().toLowerCase()
+            console.log('Nome do equipamento: '+ nome)
+
+            if (!validarString(nome)) {
+                return;
+            }
+
             let quantidade = parseInt(prompt('Quantidade de equipamento: '))
+            console.log('Quantidade de equipamento:' + quantidade)
 
             if (quantidade <= 0 || isNaN(quantidade) ){ // Manda um alert de resposta invalida caso quantidade seja igual a zero ou vazia.
                 alert('Quantidade invalida. Tente novamente. ')
@@ -41,6 +56,9 @@
         function venderEquipamento(){
             let nome = prompt('Nome do equipamento a venda:  ');
             let quantidade = parseInt(prompt('Quantidade do equipamento a venda: '));
+
+            console.log('Nome do equipamento vendido: ' + nome)
+            console.log('Quantidade do produto vendido: ' + quantidade)
 
             if (isNaN(quantidade || quantidade <= 0)){
                 alert('Quantidade invalida. Tente novamente.');
@@ -77,9 +95,10 @@
             mensagem += `Equipamento: ${equi.nome} Quantidade: ${equi.quantidade}\n`;
         });
         alert(mensagem);
+
+        
+        
     }
-
-
 
     function iniciarSistema(){
         let opcao;
