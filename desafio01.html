@@ -6,8 +6,8 @@
     <title>Controle de Estoque</title>
 </head>
 <body>
-    <h1>Controle de Estoque</h1>
-    <button onclick="iniciarSistema()">Iniciar Sistema</button>
+    <h1 id="titulo">Controle de Estoque</h1>
+    <button id="botao" onclick="iniciarSistema()">Iniciar Sistema</button>
 
     <script>
     
@@ -26,7 +26,7 @@
         }
 
         function adicionarEquipamento(){ 
-            let nome = prompt('Nome do equipamento? ').trim().toLowerCase()
+            let nome = prompt('Nome do equipamento? ').toLowerCase();
             console.log('Nome do equipamento: '+ nome)
 
             if (!validarString(nome)) {
@@ -54,7 +54,7 @@
         }
         
         function venderEquipamento(){
-            let nome = prompt('Nome do equipamento a venda:  ');
+            let nome = prompt('Nome do equipamento a venda:  ').toLowerCase();
             let quantidade = parseInt(prompt('Quantidade do equipamento a venda: '));
 
             console.log('Nome do equipamento vendido: ' + nome)
@@ -66,6 +66,7 @@
             }
 
             let equipamento = estoque.find(equi => equi.nome === nome);
+
             if (!equipamento){
                 alert('Este equipamento não foi encontrado no nosso estoque!!');
                 return;
@@ -94,10 +95,7 @@
         estoque.forEach(equi => {
             mensagem += `Equipamento: ${equi.nome} Quantidade: ${equi.quantidade}\n`;
         });
-        alert(mensagem);
-
-        
-        
+        alert(mensagem);  
     }
 
     function iniciarSistema(){
@@ -123,7 +121,7 @@
         } while (opcao !== "4");
     }
 
-    iniciarSistema();
+    
     </script>
     
 
