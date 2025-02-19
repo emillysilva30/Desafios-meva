@@ -12,7 +12,7 @@
 
     <script>
         
-        let estoque = []; //testando
+        let estoque = []; 
         
         function exibirMenu() {
             return prompt("Menu:\n1 - Adicionar Equipamento\n2 - Vender Equipamento\n3 - Exibir Estoque\n 4 - Sair\nOpção: ")
@@ -29,6 +29,7 @@
         function adicionarEquipamento(){ 
             let nome = prompt('Nome do equipamento? ').toLowerCase();
             console.log('Nome do equipamento: '+ nome)
+            console.log(nome)
 
             if (!validarString(nome)) {
                 return;
